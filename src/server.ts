@@ -1,5 +1,8 @@
 import express from 'express'
 import cors from 'cors'
+
+import 'dotenv/config'
+
 import { mainRouter } from './routes/main'
 import helmet from 'helmet'
 import { mongoConnect } from './database/mongo'
