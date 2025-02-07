@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "scripts": {
       "dev": "tsx watch src/server.ts",
-      "build": "cp .env ./dist/.env && npx tsc"
+      "build": "cp .env ./dist/.env && cp server.key ./dist/server.key && cp server.cert ./dist/server.cert && npx tsc"
     },
     "dependencies": {
       "axios": "^1.7.2",
