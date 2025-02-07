@@ -10,8 +10,16 @@ import { mongoConnect } from './database/mongo'
 mongoConnect()
 
 const server = express()
-server.use(helmet())
-server.use(cors())
+server.use(helmet({
+    crossOriginResourcePolicy: { policy: "cross-origin" },
+    crossOriginOpenerPolicy: { policy: "unsafe-none" }
+}))
+server.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true
+}))
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }));
 
