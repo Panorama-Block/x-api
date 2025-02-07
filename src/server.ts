@@ -1,5 +1,13 @@
 import express from 'express'
 import cors from 'cors'
+import https from 'https'
+import * as fs from 'fs'
+
+const options = {
+  key: fs.readFileSync("server.key"),
+  cert: fs.readFileSync("server.cert"),
+}
+
 
 import 'dotenv/config'
 
@@ -10,6 +18,7 @@ import { mongoConnect } from './database/mongo'
 mongoConnect()
 
 const server = express()
+
 server.use(helmet({
     crossOriginResourcePolicy: { policy: "cross-origin" },
     crossOriginOpenerPolicy: { policy: "unsafe-none" }
@@ -21,11 +30,11 @@ server.use(cors({
     credentials: true
 }))
 server.use(express.json())
-server.use(express.urlencoded({ extended: true }));
+server.use(express.urlencoded({ extended: true }))
 
 server.use(mainRouter)
 
-const port = process.env.PORT || 8000
-server.listen(port, () => {
-    console.log(`🚀 Servidor rodando em http://localhost:${port}`)
+const port = process.env.PORT || 443
+https.createServer(options, server).listen(port, () => {
+    console.log(`Servidor rodando em HTTPS na porta ${port}`)
 })
