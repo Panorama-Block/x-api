@@ -3,13 +3,12 @@ import cors from 'cors'
 import https from 'https'
 import * as fs from 'fs'
 
-const options = {
-  key: fs.readFileSync("server.key"),
-  cert: fs.readFileSync("server.cert"),
-}
-
-
 import 'dotenv/config'
+
+const options = {
+  key: fs.readFileSync("/etc/letsencrypt/live/x-api.panoramablock.com/privkey.pem"),
+  cert: fs.readFileSync("/etc/letsencrypt/live/x-api.panoramablock.com/fullchain.pem"),
+}
 
 import { mainRouter } from './routes/main'
 import helmet from 'helmet'
