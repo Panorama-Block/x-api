@@ -25,5 +25,12 @@ const schema = new Schema<TweetType>({
 })
 
 const modelName: string = 'Tweet'
+const zicoModelName: string = 'ZicoTweet'
 
-export default (connection && connection.models[modelName]) ? connection.models[modelName] as Model<TweetType> : model<TweetType>(modelName, schema)
+export const Tweet = (connection && connection.models[modelName]) 
+    ? connection.models[modelName] as Model<TweetType> 
+    : model<TweetType>(modelName, schema, 'tweets')
+
+export const ZicoTweet = (connection && connection.models[zicoModelName]) 
+    ? connection.models[zicoModelName] as Model<TweetType> 
+    : model<TweetType>(zicoModelName, schema, 'posted_tweets_zico')
