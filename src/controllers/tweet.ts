@@ -48,3 +48,20 @@ export const getAllAvaxTweets: RequestHandler = async (req, res) => {
     });
   }
 }
+
+export const getAllHederaTweets: RequestHandler = async (req, res) => {
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 20;
+
+  const result = await tweetService.getHederaTweets({ page, limit });
+
+  if (result) {
+    res.status(200).json(result);
+  }
+  else {
+    res.status(500).json({
+      error: 'An error occurred in the request'
+    });
+  }
+}
+
