@@ -27,6 +27,7 @@ const schema = new Schema<TweetType>({
 const modelName: string = 'Tweet'
 const zicoModelName: string = 'ZicoTweet'
 const avaxModelName: string = 'AvaxTweet'
+const hederaModelName: string = 'HederaTweet'
 
 export const Tweet = (connection && connection.models[modelName]) 
     ? connection.models[modelName] as Model<TweetType> 
@@ -39,3 +40,7 @@ export const ZicoTweet = (connection && connection.models[zicoModelName])
 export const AvaxTweet = (connection && connection.models[avaxModelName]) 
     ? connection.models[avaxModelName] as Model<TweetType> 
     : model<TweetType>(avaxModelName, schema, 'posted_tweets_avax')
+
+export const HederaTweet = (connection && connection.models[hederaModelName]) 
+    ? connection.models[hederaModelName] as Model<TweetType> 
+    : model<TweetType>(hederaModelName, schema, 'posted_tweets_hedera')
